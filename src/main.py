@@ -1,5 +1,4 @@
 import discord
-from tokens import TOKEN
 from discord.ext import commands
 
 from parse import parse_sloup_table
@@ -33,4 +32,6 @@ async def sloup(server):
     await server.send(message)
 
 
-client.run(TOKEN)
+with open("TOKEN.txt", "r") as token_file:
+    TOKEN = token_file.read()
+    client.run(TOKEN)
