@@ -9,7 +9,9 @@ client = commands.Bot(command_prefix="!", intents=intents)
 
 @client.command()
 async def boxeri(server):
-    await server.send("Jak rikaji boxeri, jsem vyplej :stepa:")
+    await server.send(
+        "Jak rikaji boxeri, jsem vyplej <:stepa:1249080778822778881>"
+    )
 
 
 @client.command()
@@ -25,9 +27,11 @@ async def sloup(server):
 
     message = ""
     if table is None or table == [] or table[0] == []:
-        message = "Sorry, nejak mi ta nadrz nejde cist."
+        message = (
+            "Sorry, nejak mi ta nadrz nejde cist. <:stepa:1249080778822778881>"
+        )
     else:
-        message = f"V nadrzi je ted {table[0][1]} cm vody."
+        message = f"V nadrzi je ted {table[0][1]} cm vody. <:stepa:1249080778822778881>"
 
     await server.send(message)
 
