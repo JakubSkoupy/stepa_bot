@@ -37,7 +37,7 @@ async def sloup(server):
             "Sorry, nejak mi ta nadrz nejde cist. <:stepa:1249080778822778881>"
         )
     else:
-        message = f"V nadrzi je ted {table[0][1]} cm vody. <:stepa:1249080778822778881>"
+        message = f"Hladina vody je ted {table[0][1]} cm (Aby nebyl potok je idealni tak 11-12 cm). <:stepa:1249080778822778881>"
 
     await server.send(message)
 
