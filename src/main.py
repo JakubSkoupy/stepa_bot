@@ -8,10 +8,16 @@ client = commands.Bot(command_prefix="!", intents=intents)
 
 
 @client.command()
-async def boxeri(server):
-    await server.send(
-        "Jak rikaji boxeri, jsem vyplej <:stepa:1249080778822778881>"
-    )
+async def boxeri(server, *args):
+
+    message = ""
+    if len(args) < 1:
+        message = "Jak rikaji boxeri, jsem vyplej <:stepa:1249080778822778881>"
+    else:
+        message = (
+            f"Jak rikaji boxeri, {' '.join(args)} <:stepa:1249080778822778881>"
+        )
+    await server.send(message)
 
 
 @client.command()

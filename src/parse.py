@@ -26,7 +26,6 @@ def parse_sloup_table() -> list[tuple[str, str]]:
     for i in range(2, 25):
         path = PATHS_SLOUP["xpath_l_table"] + f"/tr[{i}]"
         row_raw = html.tostring(tree.xpath(path)[0]).decode("utf-8")
-
         row_parsed: str = parse_table_row(
             row_raw, padding_start=2, every_nth=2, padding_end=3
         )
