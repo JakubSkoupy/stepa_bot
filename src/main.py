@@ -15,7 +15,9 @@ async def boxeri(server, *args):
         message = "Jak rikaji boxeri, jsem vyplej <:stepa:1249080778822778881>"
     else:
         message = (
-            f"Jak rikaji boxeri, {' '.join(args)} <:stepa:1249080778822778881>"
+            "Jak rikaji boxeri,"
+            + " ".join(args)
+            + "<:stepa:1249080778822778881>"
         )
     await server.send(message)
 
