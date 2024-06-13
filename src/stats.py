@@ -11,7 +11,7 @@ def init_json(path: str) -> None:
     return
 
 
-def report_sloup(state: int, path=PATHS_SLOUP["file_reports"]):
+def report_sloup(state: int, path=PATHS_SLOUP["file_reports"]) -> None:
     init_json(path)
     reports = load_sloup_reports(path=path)
 

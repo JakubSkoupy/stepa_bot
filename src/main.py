@@ -54,8 +54,14 @@ async def sloup(server, *args):
                             2 => Mokro jak blazen
                        """
         else:
-            message = "Diky za zpravu, beru to na vedomi."
-            stats.report_sloup(args[1])
+
+            if (args[1]) > 3:
+                message = "No takhle mokro snad ani byt nemuze."
+            elif (args[1]) < 0:
+                message = "No takhle sucho snad ani byt nemuze"
+            else:
+                message = "Diky za zpravu, beru to na vedomi."
+                stats.report_sloup(args[1])
 
     # Send message
     await server.send(message)
