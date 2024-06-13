@@ -1,4 +1,5 @@
 import discord
+import stats
 from discord.ext import commands
 
 from parse import parse_sloup_table
@@ -30,17 +31,33 @@ async def repo(server):
 
 
 @client.command()
-async def sloup(server):
+async def sloup(server, *args):
     table = parse_sloup_table()
-
     message = ""
-    if table is None or table == [] or table[0] == []:
-        message = (
-            "Sorry, nejak mi ta nadrz nejde cist. <:stepa:1249080778822778881>"
-        )
-    else:
-        message = f"Hladina vody je ted {table[0][1]} cm (Aby nebyl potok je idealni tak 11-12 cm). <:stepa:1249080778822778881>"
 
+    # Show current water state
+    if len(args) == 0:
+        if table is None or table == [] or table[0] == []:
+            message = "Sorry, nejak mi ta nadrz nejde cist. <:stepa:1249080778822778881>"
+        else:
+            message = (
+                f"Hladina vody je ted {table[0][1]} cm "
+                "(Aby nebyl potok je idealni tak 11-12 cm)."
+                " <:stepa:1249080778822778881>"
+            )
+    # Receive report
+    elif args[0] in ["r", "report"]:
+        if len(args) == 1:
+            message = """Jeste mi musis nahlasit stav potoka:
+                            0 => Sucho
+                            1 => Konci to u sharmy
+                            2 => Mokro jak blazen
+                       """
+        else:
+            message = "Diky za zpravu, beru to na vedomi."
+            stats.report_sloup(args[1])
+
+    # Send message
     await server.send(message)
 
 

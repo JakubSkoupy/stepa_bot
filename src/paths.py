@@ -1,6 +1,7 @@
 PATHS_SLOUP = {
     "url_level": "https://hydro.chmi.cz/hppsoldv/hpps_prfdyn.php?seq=38908612",
     "xpath_l_table": "/html/body/div[1]/div[3]/div/table[2]/tr[3]/td/div/table",
+    "file_reports": "reports_sloup.json",
 }
 
 PATHS_TRAM = {
