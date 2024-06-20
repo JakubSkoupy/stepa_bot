@@ -1,6 +1,7 @@
 import discord
 from client_api import client
 from commands import COMMANDS
+from logs import log_sloup_period
 
 
 @client.event
@@ -20,6 +21,11 @@ def main() -> None:
     with open("TOKEN.txt", "r") as token_file:
         TOKEN = token_file.read()
         client.run(TOKEN)
+
+
+@client.event
+async def on_ready():
+    client.loop.create_task(log_sloup_period())
 
 
 if __name__ == "__main__":
