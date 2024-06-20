@@ -1,13 +1,12 @@
 import discord
 import parse
-from client_api import respond_ch
+from client_api import respond_ch, get_user, client
 import stats
 
 
 async def sloup(message: discord.Message) -> None:
     args = message.content.split(" ")[1:]
     response = ""
-
     if len(args) == 0:
         table = parse.parse_sloup_table()
         response = (
@@ -15,7 +14,6 @@ async def sloup(message: discord.Message) -> None:
             "(Aby nebyl potok je idealni tak 11-12 cm)."
             " <:stepa:1249080778822778881>"
         )
-
     elif args[0] in ["report", "r"]:
         if len(args) == 1:
             response = """Jeste mi musis nahlasit stav potoka:
@@ -25,11 +23,11 @@ async def sloup(message: discord.Message) -> None:
                        """
 
         elif len(args) == 2:
-
             level = int(args[1])
+
             if level == 0 or level == 1 or level == 2:
                 response = "Diky za zpravu, beru to na vedomi"
-                stats.report_sloup(level, message.author)
+                stats.report_sloup(level, message.author.id)
             else:
                 response = "No takhle snad ani byt nemuze"
     else:
