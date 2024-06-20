@@ -11,7 +11,7 @@ async def log_sloup() -> None:
     channel_id_data = 1253286788299100180
     channel_id = channel_id_data
 
-    table = sloup_table_formatted()
+    table = sloup_table_formatted(even=True)
     await send_message(table, channel_id=channel_id)
 
 
