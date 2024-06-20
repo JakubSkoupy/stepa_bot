@@ -1,5 +1,5 @@
 import urllib.request
-from lxml import etree, html
+from lxml import html
 from paths import PATHS_SLOUP, PATHS_TRAM
 
 
@@ -51,8 +51,9 @@ def parse_trams() -> list[tuple[int, str, str]]:
 
 
 def main():
-    sloup_table = parse_sloup_table()
-    parse_trams()
+    # sloup_table = parse_sloup_table()
+    # parse_trams()
+    pass
 
 
 if __name__ == "__main__":

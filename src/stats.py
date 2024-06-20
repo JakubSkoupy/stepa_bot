@@ -11,8 +11,11 @@ def init_json(path: str) -> None:
     return
 
 
-def report_sloup(state: int, path=PATHS_SLOUP["file_reports"]) -> None:
+def report_sloup(
+    state: int, author: str, path=PATHS_SLOUP["file_reports"]
+) -> None:
     init_json(path)
+    # TODO not loading the entire json for every new record
     reports = load_sloup_reports(path=path)
 
     table = parse_sloup_table()
@@ -25,6 +28,7 @@ def report_sloup(state: int, path=PATHS_SLOUP["file_reports"]) -> None:
         "level": int(table[0][1]),
         "value": adjusted_sum,
         "state": state,
+        "author": author,
     }
     reports.append(report)
 
