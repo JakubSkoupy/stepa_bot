@@ -5,11 +5,13 @@ from table2ascii import table2ascii as t2a, PresetStyle
 import stats
 
 
-def sloup_table_formatted(even=False) -> str:
+def sloup_table_formatted(length=1) -> str:
     table = parse.parse_sloup_table()
 
-    if even:
-        table = table[6:]
+    if length == 0:
+        table = [table[1]] + table[6:]
+    elif length == 1:
+        table = table[0:30]
 
     table_formatted = t2a(
         header=["Cas", "Hladina", "Prutok"],
@@ -56,8 +58,14 @@ async def sloup(message: discord.Message) -> None:
     # Table
     elif args[0] in ["t", "table", "tabulka"]:
 
-        if len(args) >= 2 and args[1] in ["even", "e"]:
-            response = sloup_table_formatted(even=True)
+        if len(args) >= 2 and args[1] in ["short", "s"]:
+            response = sloup_table_formatted(length=0)
+        if len(args) >= 2 and args[1] in ["long", "l"]:
+            # response = sloup_table_formatted(length=2)
+            response = (
+                "Takhle dlouhy zpravy zatim posilat neumim, Kuba to bude "
+                "muset doresit."
+            )
         else:
             response = sloup_table_formatted()
 

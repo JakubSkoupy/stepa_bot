@@ -18,18 +18,22 @@ def parse_table_row(
 
 
 def parse_sloup_table() -> list[tuple[str, str]]:
-    PATHS_SLOUP["xpath_l_table"]
+    PATHS_SLOUP["xpath_l_table_extended"]
     html_content = urllib.request.urlopen(PATHS_SLOUP["url_level"]).read()
     tree = html.fromstring(html_content)
 
     table = []
-    for i in range(2, 31):
-        path = PATHS_SLOUP["xpath_l_table"] + f"/tr[{i}]"
-        row_raw = html.tostring(tree.xpath(path)[0]).decode("utf-8")
-        row_parsed: str = parse_table_row(
-            row_raw, padding_start=2, every_nth=2, padding_end=3
-        )
-        table.append(row_parsed)
+    for i in range(2, 100):
+        path = PATHS_SLOUP["xpath_l_table_extended"] + f"/tr[{i}]"
+
+        try:
+            row_raw = html.tostring(tree.xpath(path)[0]).decode("utf-8")
+            row_parsed: str = parse_table_row(
+                row_raw, padding_start=2, every_nth=2, padding_end=3
+            )
+            table.append(row_parsed)
+        except IndexError:
+            break
     return table
 
 
