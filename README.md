@@ -1,7 +1,4 @@
 # stepa_bot
 stepa_stranik_bot
 
-Commands:
-  -boxeri
-  -sloup
-  
+Currently stagnating, because we are only collecting data
