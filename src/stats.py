@@ -1,41 +1,37 @@
 from parse import parse_sloup_table
 from paths import PATHS_SLOUP
+import csv
 import json
 import os
 
 
 def init_json(path: str) -> None:
     if not os.path.exists(path) or os.stat(path).st_size == 0:
-        with open(path, "w") as file:
-            json.dump([], path, indent=4)
+        json.dump([], path, indent=4)
     return
 
 
-def report_sloup(
-    state: int, author: str, path=PATHS_SLOUP["file_reports"]
-) -> None:
-    init_json(path)
-    # TODO not loading the entire json for every new record
-    reports = load_sloup_reports(path=path)
+def init_csv(path: str, header: list[str]) -> None:
+    if not os.path.exists(path):
+        with open(path, "a") as file:
+            writer = csv.writer(file, [header])
+            writer.writerows()
 
+
+def report_sloup(state: int, author: str, path=PATHS_SLOUP["file_reports"]) -> None:
     table = parse_sloup_table()
-    adjusted_sum = sum(
-        (int(x[1]) / (fallof + 1)) for (fallof, x) in enumerate(table)
-    ) / len(table) + int(table[0][1])
+    date = table[0][0]
 
-    report = {
-        "date": table[0][0],
-        "level": int(table[0][1]),
-        "value": adjusted_sum,
-        "state": state,
-        "author": author,
-    }
-    reports.append(report)
+    table_remove_column(table, 0)  # Remove date
+    entry = table_to_entry(table)
+    entry = [state, author, date] + entry
 
-    json_report = json.dumps(reports, indent=4)
+    print("Reporting entry: ", entry)
 
-    with open(path, "w") as out:
-        out.write(json_report)
+    with open(path, "a") as file:
+        writer = csv.writer(file)
+        writer.writerow(entry)
+    return
 
 
 def load_sloup_reports(path=PATHS_SLOUP["file_reports"]):
@@ -44,8 +40,27 @@ def load_sloup_reports(path=PATHS_SLOUP["file_reports"]):
         return reports
 
 
+def table_to_entry(table: list[list[any]], col_s=0, col_e=-1) -> list[any]:
+    """Transforms table into a single row entry"""
+    row = []
+    for table_row in table:
+        for x in table_row[col_s:col_e]:
+            row.append(x)
+    return row
+
+
+def table_add_column(table: list[list[any]], column: list[any], index: int) -> None:
+    for table_row, item in zip(table, column):
+        table_row.insert(index, item)
+
+
+def table_remove_column(table: list[list[any]], index: int) -> None:
+    for table_row in table:
+        table_row.pop(index)
+
+
 def main():
-    report_sloup(0)
+    report_sloup(0, "test")
 
     reports = load_sloup_reports()
     print(reports)
