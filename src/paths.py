@@ -2,7 +2,7 @@ PATHS_SLOUP = {
     "url_level": "https://hydro.chmi.cz/hppsoldv/hpps_prfdata.php?seq=38908612",
     "xpath_l_table": "/html/body/div[1]/div[3]/div/table[2]/tr[3]/td/div/table",
     "xpath_l_table_extended": "/html/body/div[1]/div/div/table[2]/tr[4]/td/div/table",
-    "file_reports": "reports_sloup.csv",
+    "file_reports": "data/reports_sloup.csv",
 }
 
 PATHS_TRAM = {
