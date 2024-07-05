@@ -23,9 +23,9 @@ def main() -> None:
         client.run(TOKEN)
 
 
-@client.event
-async def on_ready():
-    client.loop.create_task(log_sloup_period())
+# @client.event
+# async def on_ready():
+#     client.loop.create_task(log_sloup_period())
 
 
 if __name__ == "__main__":
